@@ -1,0 +1,109 @@
+import random, sys
+
+
+nooseFrames = [
+    """
+     ----------
+     |        |
+              |
+              |
+              |
+              |
+              |
+    ============
+    """,
+    """
+     ----------
+     |        |
+     ()       |
+              |
+              |
+              |
+              |
+    ============
+    """,
+    """
+     ----------
+     |        |
+     ()       |
+     ||       |
+     ||       |
+              |
+              |
+    ============
+    """,
+    """
+     ----------
+     |        |
+     ()       |
+     ||       |
+     ||       |
+    /         |
+              |
+    ============
+    """,
+    """
+     ----------
+     |        |
+     ()       |
+     ||       |
+     ||       |
+    /  \\      |
+              |
+    ============
+    """,
+    """
+     ----------
+     |        |
+     ()       |
+    /||       |
+     ||       |
+    /  \\      |
+              |
+    ============
+    """,
+    """
+     ----------
+     |        |
+     ()       |
+    /||\\      |
+     ||       |
+    /  \\      |
+              |
+    ============
+    """,
+    """
+     ----------
+     |        |
+    (x)       |
+    /||\\      |
+     ||       |
+    /  \\      |
+              |
+    ============
+    """
+]
+
+currentNooseFrame = 0
+missedLettersList = []
+word = ["particle", "accelerator"]
+guessedList = []
+
+def printMissedLetters(missedList):
+    print("Missed Letters: ", end="")
+    for letter in missedList:
+        print(letter, end=" ")
+    print("\n")
+
+def initializeGuessedList(words):
+    global guessedList
+    print(len(words))
+    for i in range(0, len(words)):
+        guessedList.append("")
+        for j in range(0, len(words[i])):
+            guessedList[i] += "_"
+
+def guessLetter(guess):
+    global word, guessedList
+
+initializeGuessedList(word)
