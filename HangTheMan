@@ -1,4 +1,4 @@
-import random, sys
+import random, time, sys
 
 
 nooseFrames = [
@@ -105,5 +105,13 @@ def initializeGuessedList(words):
 
 def guessLetter(guess):
     global word, guessedList
+    for i in range(0, len(word)):
+        if word[i] == guess:
+            guessedList[i] = guess
 
 initializeGuessedList(word)
+
+while True:
+   printMissedLetters(missedLettersList)
+   guessLetter(input("Guess: "))
+   print(guessedList)
