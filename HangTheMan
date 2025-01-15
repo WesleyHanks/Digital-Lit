@@ -1,3 +1,4 @@
+
 import random, time, sys
 
 
@@ -86,7 +87,7 @@ nooseFrames = [
 
 currentNooseFrame = 0
 missedLettersList = []
-word = ["particle", "accelerator"]
+word = [["p","a","r","t","i","c","l","e"], ["a","c","c","e","l","e","r","a","t","o","r"]]
 guessedList = []
 
 def printMissedLetters(missedList):
@@ -103,15 +104,24 @@ def initializeGuessedList(words):
         for j in range(0, len(words[i])):
             guessedList[i] += "_"
 
+def printGuessedList(guessedList):
+    for i in range(0, len(guessedList)):
+        for j in range(0, len(guessedList[i])):
+            print(guessedList[i][j], end="")
+        print(" ", end ="")
+
 def guessLetter(guess):
-    global word, guessedList
+    global word, guessedList, missedLettersList
     for i in range(0, len(word)):
-        if word[i] == guess:
-            guessedList[i] = guess
+        for j in range(0, len(word[i])):
+            print(word[i][j])
+            print(guessedList[i][j])
+            if word[i][j].lower() == guess.lower():
+                guessedList[i][j] = "a"
 
 initializeGuessedList(word)
 
 while True:
    printMissedLetters(missedLettersList)
    guessLetter(input("Guess: "))
-   print(guessedList)
+   printGuessedList(guessedList)
