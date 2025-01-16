@@ -85,43 +85,59 @@ nooseFrames = [
     """
 ]
 
-currentNooseFrame = 0
 missedLettersList = []
 word = [["p","a","r","t","i","c","l","e"], ["a","c","c","e","l","e","r","a","t","o","r"]]
 guessedList = []
 
 def printMissedLetters(missedList):
-    print("Missed Letters: ", end="")
+    print("Missed Letters: ", end="\n")
     for letter in missedList:
-        print(letter, end=" ")
+        print(letter.upper(), end=" ")
     print("\n")
 
 def initializeGuessedList(words):
     global guessedList
     print(len(words))
     for i in range(0, len(words)):
-        guessedList.append("")
+        guessedList.append([])
         for j in range(0, len(words[i])):
-            guessedList[i] += "_"
+            guessedList[i].append("_")
 
 def printGuessedList(guessedList):
     for i in range(0, len(guessedList)):
         for j in range(0, len(guessedList[i])):
             print(guessedList[i][j], end="")
         print(" ", end ="")
+    print("\n")
 
 def guessLetter(guess):
     global word, guessedList, missedLettersList
+    hit = False
     for i in range(0, len(word)):
         for j in range(0, len(word[i])):
-            print(word[i][j])
-            print(guessedList[i][j])
             if word[i][j].lower() == guess.lower():
-                guessedList[i][j] = "a"
+                guessedList[i][j] = guess
+                hit = True
+    if not(hit):
+        missedLettersList.append(guess)
+
 
 initializeGuessedList(word)
 
 while True:
-   printMissedLetters(missedLettersList)
-   guessLetter(input("Guess: "))
-   printGuessedList(guessedList)
+    print(nooseFrames[len(missedLettersList)])
+    printMissedLetters(missedLettersList)
+    printGuessedList(guessedList)
+    if len(missedLettersList) >= len(nooseFrames) - 1:
+        print("""\"The criminal is dead and the man who would free someone this terrible failed, remember this moment my friends...\"
+            He's right, you know. Can you imagine the chaos if this man went free? Do you even know who this was? No matter, he died.
+            I would ask yuo to not try to undermine justice systems in the future, if possible. Society isn't exactly in a state to
+            handle something like you. After all, what would the conspiracy theorists do if they were actually right?""")
+        sys.exit()
+    for word in guessedList:
+        if not("_" in word):
+            print("""You have won. You saved the guy, I think. The more important question, why was he being hung in the first place? Have you just freed a murderer?
+                    Even more importantly, do you know what the ramifications for this are? Just think about it for a minute. Think upon your blatant disregard for the
+                    system of justice.""")
+            sys.exit()
+    guessLetter(input("Guess: "))
